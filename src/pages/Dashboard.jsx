@@ -20,6 +20,8 @@ import TransactionsTable from "../components/TransactionsTable";
 import AddTransactionModal from "../components/AddTransactionModal";
 
 export default function Dashboard() {
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
   const [transactions, setTransactions] = useState([]);
 
   const [loading, setLoading] = useState(true);
@@ -229,31 +231,59 @@ export default function Dashboard() {
   return (
     <div
       className="
-      min-h-screen
-      bg-[#F5F6FC]
-      dark:bg-slate-900
-      p-6
-    "
+  min-h-screen
+  bg-[#F5F6FC]
+  dark:bg-slate-900
+  p-3
+  sm:p-4
+  lg:p-6
+"
     >
       <div
         className="
-        flex
-        gap-6
-      "
+  flex
+  flex-col
+  lg:flex-row
+  gap-4
+  lg:gap-6
+"
       >
-        <Sidebar />
+        <div className="hidden lg:block">
+          <Sidebar
+            collapsed={sidebarCollapsed}
+            setCollapsed={setSidebarCollapsed}
+          />
+        </div>
 
         <main
           className="
-          flex-1
-        "
+    flex-1
+    min-w-0
+    transition-all
+    duration-300
+  "
         >
           <Navbar />
+          <div className="lg:hidden mb-4">
+            <button
+              className="
+      bg-white
+      dark:bg-slate-800
+      px-4
+      py-2
+      rounded-xl
+      shadow
+      font-medium
+    "
+            >
+              ☰ Menu
+            </button>
+          </div>
 
           <div className="mt-8">
             <h1
               className="
-              text-3xl
+              text-2xl sm:text-3xl
               font-bold
               text-slate-800
               dark:text-white
@@ -278,8 +308,9 @@ export default function Dashboard() {
           <div
             className="
             grid
-            md:grid-cols-2
-            xl:grid-cols-4
+grid-cols-1
+sm:grid-cols-2
+xl:grid-cols-4
             gap-5
             mt-8
           "
@@ -297,15 +328,16 @@ export default function Dashboard() {
 
           <div
             className="
-            grid
-            lg:grid-cols-3
+           grid
+grid-cols-1
+xl:grid-cols-3
             gap-6
             mt-6
           "
           >
             <div
               className="
-              lg:col-span-2
+              xl:col-span-2
               bg-white
               dark:bg-slate-800
               rounded-3xl
@@ -332,7 +364,8 @@ export default function Dashboard() {
           <div
             className="
             grid
-            lg:grid-cols-3
+grid-cols-1
+xl:grid-cols-3
             gap-6
             mt-6
           "
@@ -398,24 +431,29 @@ export default function Dashboard() {
 
           setOpenModal(true);
         }}
-        className="
-          fixed
-          bottom-8
-          right-8
-          h-16
-          w-16
-          rounded-full
-          bg-[#6C5CE7]
-          text-white
-          flex
-          items-center
-          justify-center
-          shadow-xl
-          hover:scale-110
-          transition
-        "
+       className="
+fixed
+bottom-4
+right-4
+sm:bottom-8
+sm:right-8
+h-14
+w-14
+sm:h-16
+sm:w-16
+rounded-full
+bg-[#6C5CE7]
+text-white
+flex
+items-center
+justify-center
+shadow-xl
+hover:scale-110
+transition
+z-50
+"
       >
-        <Plus size={28} />
+        <Plus size={28} /> 
       </button>
     </div>
   );
